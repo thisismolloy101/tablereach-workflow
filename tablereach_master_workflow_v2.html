@@ -1,0 +1,294 @@
+
+<style>
+  * { box-sizing: border-box; }
+  .wrap { padding: 16px 0; font-family: var(--font-sans); color: var(--color-text-primary); }
+  .phase-block { margin-bottom: 12px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+  .phase-header { display: flex; align-items: center; gap: 12px; padding: 12px 16px; cursor: pointer; user-select: none; }
+  .phase-label { font-size: 14px; font-weight: 500; flex: 1; }
+  .phase-tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
+  .phase-count { font-size: 12px; color: var(--color-text-secondary); }
+  .chevron { font-size: 12px; color: var(--color-text-tertiary); transition: transform 0.2s; }
+  .phase-body { display: none; border-top: 0.5px solid var(--color-border-tertiary); }
+  .phase-body.open { display: block; }
+  .step-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 16px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .step-row:last-child { border-bottom: none; }
+  .step-num { font-size: 11px; color: var(--color-text-tertiary); min-width: 28px; padding-top: 2px; }
+  .step-text { font-size: 13px; color: var(--color-text-primary); flex: 1; line-height: 1.5; }
+  .step-badge { font-size: 11px; padding: 2px 7px; border-radius: 10px; white-space: nowrap; margin-top: 2px; }
+  .badge-ai { background: #EEEDFE; color: #3C3489; }
+  .badge-human { background: #E1F5EE; color: #085041; }
+  .badge-auto { background: #FAEEDA; color: #633806; }
+  .badge-handoff { background: #FAECE7; color: #712B13; font-weight: 500; }
+  .rule-row { background: #EEEDFE; border-left: 3px solid #7F77DD; padding-left: 13px !important; }
+  .rule-num { color: #534AB7 !important; font-weight: 600; }
+  .rule-text { color: #3C3489 !important; font-size: 12px !important; font-style: italic; }
+  @media (prefers-color-scheme: dark) {
+    .badge-ai { background: #3C3489; color: #CECBF6; }
+    .badge-human { background: #085041; color: #9FE1CB; }
+    .badge-auto { background: #633806; color: #FAC775; }
+    .badge-handoff { background: #712B13; color: #F5C4B3; }
+    .rule-row { background: #26215C; border-left-color: #AFA9EC; }
+    .rule-num { color: #AFA9EC !important; }
+    .rule-text { color: #CECBF6 !important; }
+  }
+  .phase-header:hover { background: var(--color-background-secondary); }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; padding: 0 0 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--color-text-secondary); }
+</style>
+<div class="wrap">
+  <div class="legend">
+    <div class="legend-item"><span class="step-badge badge-ai">AI agent</span></div>
+    <div class="legend-item"><span class="step-badge badge-human">Human</span></div>
+    <div class="legend-item"><span class="step-badge badge-auto">Automated</span></div>
+    <div class="legend-item"><span class="step-badge badge-handoff">Handoff</span></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 1 — Content creation strategy</span>
+      <span class="step-badge badge-human phase-tag">Strategy</span>
+      <span class="phase-count">8 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">1</span><span class="step-text">Define target restaurant client profile: location, cuisine type, chain size, price tier</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">2</span><span class="step-text">Identify which content formats F&B audiences engage with (video vs static, Reels vs TikTok)</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">3</span><span class="step-text">Pull top-performing F&B content examples from target platforms</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">4</span><span class="step-text">Identify seasonal and campaign calendar hooks 4–6 weeks ahead</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">5</span><span class="step-text">List content pillars for TableReach (specials, seasonal, holiday, brand)</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">6</span><span class="step-text">Confirm which content types are in-scope for current production capacity</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">7</span><span class="step-text">Document approved content strategy as standing SOP reference</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">8</span><span class="step-text">→ Handoff to Content Output Strategy</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 2 — Content output strategy + online presence</span>
+      <span class="step-badge badge-human phase-tag">Strategy</span>
+      <span class="phase-count">9 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">9</span><span class="step-text">Define posting cadence per client tier (Starter: 4/mo, Growth: 8/mo, Enterprise: unlimited)</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">10</span><span class="step-text">Define which platforms each client tier posts on (IG, TikTok, Facebook)</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">11</span><span class="step-text">Create master content calendar template for each tier</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">12</span><span class="step-text">Populate calendar with Thai + Asian + global holiday hooks 4 weeks ahead</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">13</span><span class="step-text">Assign content type to each calendar slot (video, static, story)</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">14</span><span class="step-text">Send calendar preview to client account manager for approval</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">15</span><span class="step-text">Lock calendar once approved — no changes without formal request</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">16</span><span class="step-text">Set up TableReach presence pages (IG, website) as proof of concept for sales</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">17</span><span class="step-text">→ Handoff to Sales Funnel</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 3 — Sales funnel (outreach + inbound)</span>
+      <span class="step-badge badge-human phase-tag">Sales</span>
+      <span class="phase-count">12 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">18</span><span class="step-text">Build target restaurant list: chain name, location, contact, IG handle, current content quality score</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">19</span><span class="step-text">Score each lead: does their current content look manual/bad? If yes → high priority</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">20</span><span class="step-text">Write outreach message template per tier (DM, email, WhatsApp)</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">21</span><span class="step-text">Human reviews and approves outreach message before sending</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">22</span><span class="step-text">Send outreach in batches — log every send in CRM with date + channel</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">23</span><span class="step-text">AI monitors inbound DMs and enquiries — flags warm leads within 1 hour</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">24</span><span class="step-text">Human responds to warm leads within same business day</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">25</span><span class="step-text">Send sample content + pricing deck to interested leads</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">26</span><span class="step-text">Follow up at 48hr if no reply — AI drafts follow-up, human sends</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">27</span><span class="step-text">Lead selects tier → book discovery call or accept proposal</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">28</span><span class="step-text">Issue proposal and contract via DocuSign or equivalent</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">29</span><span class="step-text">→ Handoff to Payment on contract signed</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 4 — Payment</span>
+      <span class="step-badge badge-auto phase-tag">Admin</span>
+      <span class="phase-count">6 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">30</span><span class="step-text">Send payment link for first month immediately on contract signature</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">31</span><span class="step-text">Confirm payment received — do not begin onboarding until payment clears</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">32</span><span class="step-text">Issue receipt and invoice automatically</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">33</span><span class="step-text">Set recurring billing on 30-day cycle</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">34</span><span class="step-text">Flag missed payments to human within 24 hours</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">35</span><span class="step-text">→ Handoff to Onboarding on payment confirmed</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 5 — Onboarding</span>
+      <span class="step-badge badge-human phase-tag">Client ops</span>
+      <span class="phase-count">10 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">36</span><span class="step-text">Send automated welcome message with onboarding checklist within 1 hour of payment</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">37</span><span class="step-text">Client fills brand intake form: logo, colours, fonts, tone of voice, do-not-use list</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">38</span><span class="step-text">Client uploads existing brand assets to shared folder</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">39</span><span class="step-text">Assign dedicated account manager — send introduction message</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">40</span><span class="step-text">AI ingests brand intake form and generates first draft Design Bible</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">41</span><span class="step-text">Account manager reviews Design Bible draft — red-lines anything incorrect</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">42</span><span class="step-text">AI updates Design Bible based on red-lines — version 2 produced</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">43</span><span class="step-text">Client approves Design Bible — locked as master brand reference</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">44</span><span class="step-text">Send first content calendar to client for review</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">45</span><span class="step-text">→ Handoff to Creative Client Meeting</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 6 — Creative client meeting + ideation</span>
+      <span class="step-badge badge-human phase-tag">Creative</span>
+      <span class="phase-count">12 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row rule-row"><span class="step-num rule-num">★</span><span class="step-text rule-text">Standing rule — trend research runs before every Phase 6 cycle, every month. Do not skip. Do not reuse previous sweep results. Concepts are only generated after steps 45a–45c are complete.</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">45a</span><span class="step-text">Trend sweep: search currently viral and high-performing F&B content on Instagram Reels + TikTok — formats, hooks, sounds, styles gaining traction in the last 30 days</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">45b</span><span class="step-text">Relevance filter: from sweep results, shortlist 3–5 formats adaptable to this client's assets, brand tone, format rules, and menu — flag any trend that requires an on-camera presenter</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">45c</span><span class="step-text">Attach trend shortlist to kick-off meeting agenda (step 47) — account manager references these as live conversation starters with client on campaign priorities</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">46</span><span class="step-text">Book 30-min kick-off call with client: purpose is to confirm brief, not to redesign everything</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">47</span><span class="step-text">AI generates meeting agenda from Design Bible + content calendar — trend brief from 45c attached</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">48</span><span class="step-text">Run the call — confirm: hero dishes, campaign priorities, tone preferences</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">49</span><span class="step-text">AI transcribes and summarises call into action points within 10 minutes</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">50</span><span class="step-text">Human reviews summary — confirms accuracy before it becomes brief</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">51</span><span class="step-text">AI generates 3 content concept options per slot in the calendar</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">52</span><span class="step-text">Human selects 1 concept per slot — no client involvement at this stage</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">53</span><span class="step-text">Approved concepts locked as the production brief</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">54</span><span class="step-text">→ Handoff to Creative Brief / Design Bible update</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 7 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 7 — Creative brief + storyboard</span>
+      <span class="step-badge badge-ai phase-tag">Production</span>
+      <span class="phase-count">10 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">55</span><span class="step-text">AI writes creative brief for each content piece: objective, format, key message, CTA</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">56</span><span class="step-text">AI cross-checks brief against Design Bible — flags any brand conflicts</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">57</span><span class="step-text">Human reviews brief — approves or corrects</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">58</span><span class="step-text">AI generates storyboard: scene-by-scene visual description for video, or layout for static</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">59</span><span class="step-text">AI generates image prompts for each scene/frame from storyboard</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">60</span><span class="step-text">Human reviews storyboard and image prompts — approves or rewrites</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">61</span><span class="step-text">Approved storyboard locked — no changes after this point without formal brief amendment</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">62</span><span class="step-text">AI writes copy/captions for each content piece from brief</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">63</span><span class="step-text">Human approves copy</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">64</span><span class="step-text">→ Handoff to Image Generation</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 8 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 8 — Image generation + editing</span>
+      <span class="step-badge badge-ai phase-tag">Production</span>
+      <span class="phase-count">10 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">65</span><span class="step-text">Feed approved image prompts into image generation tool (Midjourney / Flux / Firefly)</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">66</span><span class="step-text">Generate 3 variations per prompt — do not select, just generate</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">67</span><span class="step-text">Human selects 1 variation per scene</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">68</span><span class="step-text">Feed selected images into image editing pipeline: crop, colour grade, add brand overlay</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">69</span><span class="step-text">AI checks edited image against Design Bible colour rules — flags if out of spec</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">70</span><span class="step-text">If client sent own dish photos: run those through AI enhancement + background removal first</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">71</span><span class="step-text">Human QC on edited images — pass or reject with specific written reason</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">72</span><span class="step-text">Rejected images: update prompt → regenerate → re-QC</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">73</span><span class="step-text">Approved images exported to production folder, named by content slot</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">74</span><span class="step-text">→ Handoff to Video Generation</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 9 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 9 — Video generation + editing</span>
+      <span class="step-badge badge-ai phase-tag">Production</span>
+      <span class="phase-count">11 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">75</span><span class="step-text">Feed approved images + storyboard into video generation tool (Runway / Kling / Pika)</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">76</span><span class="step-text">Generate base video clip per scene — target 3–8 seconds per scene</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">77</span><span class="step-text">AI assembles scenes in storyboard order into single timeline</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">78</span><span class="step-text">AI adds: brand music bed, transition effects, text overlays from approved copy</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">79</span><span class="step-text">AI adds logo placement and CTA card per Design Bible spec</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">80</span><span class="step-text">Export draft video — 9:16 for Reels/TikTok, 1:1 for feed post</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">81</span><span class="step-text">Human watches full draft — logs specific timestamp feedback (not vague notes)</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">82</span><span class="step-text">AI applies edits based on feedback notes</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">83</span><span class="step-text">Max 2 internal revision rounds — if not passing after 2, escalate to senior review</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">84</span><span class="step-text">Final video exported to delivery folder: named, formatted, caption attached</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">85</span><span class="step-text">→ Handoff to Final QC Check</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 10 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 10 — Final QC check + human confirmation</span>
+      <span class="step-badge badge-human phase-tag">Quality</span>
+      <span class="phase-count">8 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">86</span><span class="step-text">AI runs automated QC checklist: resolution correct, logo present, CTA present, no typos</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">87</span><span class="step-text">AI cross-checks final file against Design Bible: colours, fonts, tone</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">88</span><span class="step-text">AI produces QC pass/fail report with specific line items</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">89</span><span class="step-text">Human reads QC report — confirms pass or sends back to production with reason</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">90</span><span class="step-text">Human does final eyes-on review of video + static in full screen</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">91</span><span class="step-text">Human signs off — moves file to approved delivery folder</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">92</span><span class="step-text">Notify account manager: content approved and ready for delivery</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">93</span><span class="step-text">→ Handoff to Automated Posting</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <!-- PHASE 11 -->
+  <div class="phase-block">
+    <div class="phase-header" onclick="toggle(this)">
+      <span class="phase-label">Phase 11 — Automated posting + campaign delivery</span>
+      <span class="step-badge badge-auto phase-tag">Delivery</span>
+      <span class="phase-count">9 steps</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="phase-body">
+      <div class="step-row"><span class="step-num">94</span><span class="step-text">Load approved content into scheduling tool (Later / Buffer / Meta Business Suite)</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">95</span><span class="step-text">AI assigns optimal post time per platform per client account</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">96</span><span class="step-text">Attach approved caption + hashtag set to each post</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">97</span><span class="step-text">Human does final schedule review — confirms correct content on correct date/account</span><span class="step-badge badge-human">Human</span></div>
+      <div class="step-row"><span class="step-num">98</span><span class="step-text">Activate automated posting — system posts without further human input</span><span class="step-badge badge-auto">Automated</span></div>
+      <div class="step-row"><span class="step-num">99</span><span class="step-text">AI monitors post performance at 24hr, 48hr, 7-day marks</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">100</span><span class="step-text">AI flags any post performing below benchmark — sends alert to account manager</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">101</span><span class="step-text">AI compiles monthly performance report per client (Growth + Enterprise tiers)</span><span class="step-badge badge-ai">AI agent</span></div>
+      <div class="step-row"><span class="step-num">102</span><span class="step-text">→ Loop back: feed performance data into Content Strategy for next month</span><span class="step-badge badge-handoff">Handoff</span></div>
+    </div>
+  </div>
+
+  <div style="padding:12px 0;font-size:12px;color:var(--color-text-tertiary);text-align:center">105 steps across 11 phases — click any phase to expand &nbsp;·&nbsp; v2 — trend research added to Phase 6</div>
+</div>
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+}
+</script>
